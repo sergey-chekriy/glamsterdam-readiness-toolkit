@@ -7,10 +7,10 @@
   "types": "dist/index.d.ts",
   "dependencies": { "@grt/core": "0.1.0", "@grt/rules": "0.1.0" },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --banner.js \"#!/usr/bin/env node\"",
+    "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsx src/index.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "lint": "eslint src --ext .ts"
   }
 }

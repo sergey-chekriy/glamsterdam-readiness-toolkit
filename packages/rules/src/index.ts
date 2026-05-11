@@ -1,4 +1,4 @@
-import type { Rule } from '@grt/core';
+import type { Rule, ScanInput } from '@grt/core';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -11,14 +11,14 @@ const find = (root: string, rx: RegExp) => walk(root).filter(x => rx.test(x));
 
 export const nearCodeSizeRule: Rule = {
   id: 'near-code-size',
-  run: ({ root }) => find(root, /\.(sol|json)$/).slice(0, 1).map(x => ({
+  run: ({ root }: ScanInput) => find(root, /\.(sol|json)$/).slice(0, 1).map(x => ({
     id: 'near-code-size', severity: 'info', title: 'Code-size check placeholder', detail: `Scanned ${x}`
   }))
 };
 
 export const ethTransferLogAssumptionRule: Rule = {
   id: 'eth-transfer-log-assumption',
-  run: ({ root }) => find(root, /\.sol$/).flatMap(x => {
+  run: ({ root }: ScanInput) => find(root, /\.sol$/).flatMap(x => {
     const s = readFileSync(x, 'utf8');
     return /transfer\(|send\(|call\{value:/.test(s)
       ? [{ id: 'eth-transfer-log-assumption', severity: 'warn', title: 'Review ETH transfer assumptions', detail: `Potential ETH transfer flow in ${x}` }]

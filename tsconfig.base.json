@@ -6,11 +6,15 @@
     "strict": true,
     "declaration": true,
     "sourceMap": true,
-    "outDir": "dist",
-    "rootDir": "src",
     "types": ["node"],
     "skipLibCheck": true,
     "exactOptionalPropertyTypes": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "@grt/core": ["packages/core/src/index.ts"],
+      "@grt/rules": ["packages/rules/src/index.ts"],
+      "@grt/fixtures": ["packages/fixtures/src/index.ts"]
+    }
   }
 }
